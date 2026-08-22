@@ -1,0 +1,663 @@
+{
+  "common": {
+    "Footer": {
+      "logoImage": "/images/footerlogo.png",
+      "logoImageTitle": "Event Management Logo",
+      "desc": "Eventora crafts extraordinary events that create lasting memories. From concept to celebration, we bring your vision to life with creativity and precision.",
+      "footerColumns": [
+        {
+          "title": "QUICK LINKS",
+          "links": [
+            {
+              "label": "Home",
+              "href": "/"
+            },
+            {
+              "label": "About Us",
+              "href": "/about"
+            },
+            {
+              "label": "Services",
+              "href": "/services"
+            },
+            {
+              "label": "Our Work",
+              "href": "/work"
+            },
+            {
+              "label": "Blog",
+              "href": "/blog"
+            },
+            {
+              "label": "Testimonials",
+              "href": "/testimonials"
+            },
+            {
+              "label": "Contact Us",
+              "href": "/contact"
+            }
+          ]
+        },
+        {
+          "title": "OUR SERVICES",
+          "links": [
+            {
+              "label": "Wedding Events",
+              "href": "/services#wedding"
+            },
+            {
+              "label": "Corporate Events",
+              "href": "/services#corporate"
+            },
+            {
+              "label": "Birthday Parties",
+              "href": "/services#birthday"
+            },
+            {
+              "label": "Social Events",
+              "href": "/services#social"
+            },
+            {
+              "label": "Exhibitions & Trade Shows",
+              "href": "/services#exhibitions"
+            },
+            {
+              "label": "Conference & Seminars",
+              "href": "/services#conference"
+            },
+            {
+              "label": "Event Planning & Management",
+              "href": "/services#planning"
+            }
+          ]
+        }
+      ],
+      "footerContact": {
+        "location": "123, Celebration Street,\nJaipur, Rajasthan 302001, India",
+        "email": "hello@eventora.in",
+        "phone": "+91 98765 43210",
+        "website": "www.eventora.in"
+      },
+      "footerLegalLinks": [
+        {
+          "label": "Privacy Policy",
+          "href": "/privacy"
+        },
+        {
+          "label": "Terms & Conditions",
+          "href": "/terms"
+        },
+        {
+          "label": "Refund Policy",
+          "href": "/refund"
+        },
+        {
+          "label": "Sitemap",
+          "href": "/sitemap"
+        }
+      ],
+      "whatsappLink": "https://api.whatsapp.com/send?phone=919876543210",
+      "callLink": "tel:+919876543210",
+      "copyrightText": "Copyright © 2026. All rights reserved. Powered by Lestow",
+      "newsletter": {
+        "title": "NEWSLETTER",
+        "desc": "Subscribe to our newsletter and get the latest updates, tips & offers.",
+        "placeholder": "Enter your email"
+      },
+      "followUsTitle": "FOLLOW US"
+    }
+  },
+  "categories": {
+    "Event": {
+      "templateComponents": {
+        "template-1": {
+          "shared": {
+            "Topbar": "EventTopbar1",
+            "Header": "EventHeader1",
+            "Footer": "EventFooter1"
+          },
+          "pages": {
+            "home": {
+              "components": [
+                {
+                  "key": "Banner",
+                  "component": "EventBanner1"
+                },
+                {
+                  "key": "About",
+                  "component": "EventAbout1"
+                },
+                {
+                  "key": "Services",
+                  "component": "EventServices1"
+                },
+                {
+                  "key": "Stats",
+                  "component": "EventStats1"
+                },
+                {
+                  "key": "Testimonial",
+                  "component": "EventTestimonial1"
+                },
+                {
+                  "key": "Blog",
+                  "component": "EventBlog1"
+                },
+                {
+                  "key": "Contact",
+                  "component": "EventContact1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "sections": {
+        "Topbar": {
+          "variants": {
+            "EventTopbar1": {
+              "phone": "(10) 1234567890",
+              "email": "info@example.com",
+              "location": "1356 Broadway, New York",
+              "socialLinks": [
+                {
+                  "label": "facebook",
+                  "href": "#"
+                },
+                {
+                  "label": "instagram",
+                  "href": "#"
+                },
+                {
+                  "label": "linkedin",
+                  "href": "#"
+                },
+                {
+                  "label": "youtube",
+                  "href": "#"
+                },
+                {
+                  "label": "pinterest",
+                  "href": "#"
+                }
+              ]
+            }
+          }
+        },
+        "Header": {
+          "variants": {
+            "EventHeader1": {
+              "logo": "Eventa",
+              "logoImage": "/images/logo.png",
+              "menu": [
+                {
+                  "label": "Home",
+                  "href": "/"
+                },
+                {
+                  "label": "About",
+                  "href": "/about",
+                  "subItems": [
+                    {
+                      "label": "Our Mission",
+                      "href": "/our-mission"
+                    },
+                    {
+                      "label": "Our Vision",
+                      "href": "/our-vision"
+                    },
+                    {
+                      "label": "Our Story",
+                      "href": "/our-story"
+                    }
+                  ]
+                },
+                {
+                  "label": "Services",
+                  "href": "#services"
+                },
+                {
+                  "label": "Events",
+                  "href": "#events"
+                },
+                {
+                  "label": "Gallery",
+                  "href": "#gallery"
+                },
+                {
+                  "label": "FAQ",
+                  "href": "#faq"
+                },
+                {
+                  "label": "Blog",
+                  "href": "#blog"
+                },
+                {
+                  "label": "Contact",
+                  "href": "#contact"
+                }
+              ],
+              "buttons": [
+                {
+                  "label": "Get A Quote",
+                  "href": "/contact"
+                }
+              ]
+            }
+          }
+        },
+        "Banner": {
+          "variants": {
+            "EventBanner1": {
+              "backgroundImage": "/images/hero/hero1.png",
+              "pretitle": "DREAM ✦ PLAN ✦ CELEBRATE",
+              "title": "WE PLAN Extraordinary EVENTS",
+              "desc": "From intimate gatherings to grand celebrations,\nwe turn your moments into unforgettable experiences.",
+              "buttons": [
+                {
+                  "label": "Explore Events",
+                  "href": "/events"
+                },
+                {
+                  "label": "Our Services",
+                  "href": "/services"
+                }
+              ],
+              "bottomFeatures": [
+                {
+                  "title": "Tailored\nExperiences",
+                  "icon": "CalendarDays"
+                },
+                {
+                  "title": "Expert\nTeam",
+                  "icon": "Users"
+                },
+                {
+                  "title": "Premium\nQuality",
+                  "icon": "Gem"
+                },
+                {
+                  "title": "Memorable\nMoments",
+                  "icon": "Star"
+                }
+              ]
+            }
+          }
+        },
+        "Services": {
+          "variants": {
+            "EventServices1": {
+              "title": "Our Services",
+              "subtitle": "Comprehensive Solutions\nFor *Unforgettable Events*",
+              "desc": "From concept to celebration, we handle every detail\nto create seamless and memorable experiences.",
+              "servicesList": [
+                {
+                  "id": 1,
+                  "title": "Wedding",
+                  "desc": "Beautifully planned weddings that reflect your love story and create memories for a lifetime.",
+                  "img": "/images/services/s1.png"
+                },
+                {
+                  "id": 2,
+                  "title": "Birthday",
+                  "desc": "Creative themes, fun setups and perfect planning to make every birthday extra special.",
+                  "img": "/images/services/s2.png"
+                },
+                {
+                  "id": 3,
+                  "title": "Corporate Events",
+                  "desc": "Professional events that inspire, engage and deliver results for your brand and business goals.",
+                  "img": "/images/services/s3.png"
+                },
+                {
+                  "id": 4,
+                  "title": "Engagement & Anniversary",
+                  "desc": "Celebrate your special moments with elegant setups and unforgettable experiences.",
+                  "img": "/images/services/s4.png"
+                },
+                {
+                  "id": 5,
+                  "title": "Baby Shower",
+                  "desc": "Adorable themes and joyful setups to celebrate the little one on the way with love and happiness.",
+                  "img": "/images/services/s5.png"
+                },
+                {
+                  "id": 6,
+                  "title": "Private Parties",
+                  "desc": "From intimate gatherings to grand celebrations, we create the perfect ambience for your special moments.",
+                  "img": "/images/services/s6.png"
+                },
+                {
+                  "id": 7,
+                  "title": "Award Ceremonies",
+                  "desc": "Recognize achievements in style with flawless planning and impactful ceremonies.",
+                  "img": "/images/services/s7.png"
+                },
+                {
+                  "id": 8,
+                  "title": "Fashion Shows",
+                  "desc": "High-energy runway shows with stunning production and attention to every detail.",
+                  "img": "/images/services/s8.png"
+                }
+              ],
+              "button": {
+                "label": "Explore All Services",
+                "href": "/services"
+              }
+            }
+          }
+        },
+        "About": {
+          "variants": {
+            "EventAbout1": {
+              "title": "About Us",
+              "subtitle": "We Create Experience\nThat People Remember",
+              "desc": "Eventora is a full-service event management company dedicated to delivering exceptional events that inspire, engage, and create lasting memories.",
+              "image": "/images/about.jpg",
+              "stats": [
+                {
+                  "value": "8+",
+                  "label": "Years Experience"
+                },
+                {
+                  "value": "500+",
+                  "label": "Events Completed"
+                },
+                {
+                  "value": "100%",
+                  "label": "Client Satisfaction"
+                }
+              ],
+              "features": [
+                {
+                  "title": "Creative &\nUnique Ideas",
+                  "icon": "Lightbulb"
+                },
+                {
+                  "title": "Professional\nTeam",
+                  "icon": "Users"
+                },
+                {
+                  "title": "Perfect\nPlanning",
+                  "icon": "Calendar"
+                },
+                {
+                  "title": "Trusted &\nReliable",
+                  "icon": "Award"
+                }
+              ],
+              "images": [
+                "/images/about/a1.png",
+                "/images/about/a2.png",
+                "/images/about/a3.png",
+                "/images/about/a4.png"
+              ],
+              "button": {
+                "label": "Explore More About Us",
+                "href": "/about"
+              }
+            }
+          }
+        },
+        "Testimonial": {
+          "variants": {
+            "EventTestimonial1": {
+              "title": "OUR TESTIMONIALS",
+              "subtitle": "What Our Clients Say About Eventora",
+              "desc": "Real experiences, genuine feedback, and lasting impressions from clients who trusted us with their special moments.",
+              "testimonialsList": [
+                {
+                  "id": 1,
+                  "name": "Sarah Williams",
+                  "role": "Wedding Client",
+                  "image": "/images/testimonials/testimonial-1.jpg",
+                  "text": "From the initial planning to the final execution, Eventora made everything seamless and stress-free. The team was professional, creative, and truly cared about every little detail. Our event was beyond our expectations!"
+                },
+                {
+                  "id": 2,
+                  "name": "Jacob Wallace",
+                  "role": "Corporate Client",
+                  "image": "/images/testimonials/testimonial-2.jpg",
+                  "text": "From the initial planning to the final execution, Eventora made everything seamless and stress-free. The team was professional, creative, and truly cared about every little detail. Our event was beyond our expectations!"
+                },
+                {
+                  "id": 3,
+                  "name": "Emily Chen",
+                  "role": "Birthday Party",
+                  "image": "/images/testimonials/3.jpg",
+                  "text": "Eventora took our vision and turned it into reality! Every detail was perfect, and the atmosphere they created was magical. I highly recommend them for any special occasion."
+                },
+                {
+                  "id": 4,
+                  "name": "Michael Brown",
+                  "role": "Conference Organizer",
+                  "image": "/images/testimonials/4.jpg",
+                  "text": "The level of professionalism and dedication from the Eventora team was outstanding. Our annual conference ran smoother than ever before. Fantastic service from start to finish!"
+                },
+                {
+                  "id": 5,
+                  "name": "Olivia & James",
+                  "role": "Anniversary Celebration",
+                  "image": "/images/testimonials/5.jpg",
+                  "text": "We wanted a memorable night, and Eventora delivered exactly that. From the beautiful decorations to the flawless catering coordination, everything was handled beautifully."
+                }
+              ]
+            }
+          }
+        },
+        "Blog": {
+          "variants": {
+            "EventBlog1": {
+              "title": "OUR BLOG",
+              "subtitle": "Latest Insights & Inspiration From Eventora",
+              "desc": "Ideas, tips, and trends to help you plan unforgettable events and create lasting memories.",
+              "blogsList": [
+                {
+                  "id": 1,
+                  "title": "Top 10 Wedding Trends to Watch in 2024",
+                  "tag": "Wedding",
+                  "date": "12 May, 2024",
+                  "image": "/images/blog/blog1.png"
+                },
+                {
+                  "id": 2,
+                  "title": "How to Plan a Stress-Free Birthday Party",
+                  "tag": "Birthday",
+                  "date": "08 May, 2024",
+                  "image": "/images/blog/blog2.png"
+                },
+                {
+                  "id": 3,
+                  "title": "5 Tips for a Successful Corporate Event",
+                  "tag": "Corporate",
+                  "date": "02 May, 2024",
+                  "image": "/images/blog/blog3.png"
+                }
+              ],
+              "readMoreText": "Read More",
+              "button": {
+                "label": "View All Blogs",
+                "href": "/blogs"
+              }
+            }
+          }
+        },
+        "Mission": {
+          "variants": {
+            "EventMission1": {
+              "title": "OUR MISSION",
+              "subtitle": "Our Mission",
+              "desc": "Our mission is to turn ideas into unforgettable experiences. We combine creativity, innovation, and flawless execution to deliver events that exceed expectations and build meaningful connections.",
+              "image": "/images/mission/mission.png"
+            }
+          }
+        },
+        "Vision": {
+          "variants": {
+            "EventVision1": {
+              "title": "OUR VISION",
+              "subtitle": "Our Vision",
+              "desc": "Our vision is to be the leading event management company known for innovation, creativity, and flawless execution. We aim to consistently exceed client expectations by turning dreams into extraordinary realities that create lasting memories for all attendees.",
+              "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop"
+            }
+          }
+        },
+        "Stats": {
+          "variants": {
+            "EventStats1": {
+              "statsList": [
+                {
+                  "icon": "Calendar",
+                  "value": 850,
+                  "suffix": "+",
+                  "label": "Events Completed"
+                },
+                {
+                  "icon": "HeartHandshake",
+                  "value": 650,
+                  "suffix": "+",
+                  "label": "Happy Clients"
+                },
+                {
+                  "icon": "Users",
+                  "value": 120,
+                  "suffix": "+",
+                  "label": "Team Members"
+                },
+                {
+                  "icon": "Award",
+                  "value": 8,
+                  "suffix": "+",
+                  "label": "Years Experience"
+                }
+              ]
+            }
+          }
+        },
+        "Team": {
+          "variants": {
+            "EventTeam1": {
+              "title": "OUR TEAMS",
+              "subtitle": "Meet Our Amazing Team",
+              "desc": "A passionate group of creative minds and event experts working together to turn your ideas into unforgettable experiences.",
+              "teamList": [
+                {
+                  "name": "Rohit Sharma",
+                  "role": "Founder & CEO",
+                  "description": "Visionary leader with a passion for creating extraordinary events.",
+                  "image": "/images/team/1.png",
+                  "socials": {
+                    "linkedin": "#",
+                    "instagram": "#",
+                    "email": "#"
+                  }
+                },
+                {
+                  "name": "Priya Mehta",
+                  "role": "Head of Operations",
+                  "description": "Turning concepts into flawless realities with meticulous attention to detail.",
+                  "image": "/images/team/priya.png",
+                  "socials": {
+                    "linkedin": "#",
+                    "instagram": "#",
+                    "email": "#"
+                  }
+                },
+                {
+                  "name": "Arjun Verma",
+                  "role": "Creative Director",
+                  "description": "Creative mastermind behind our concepts and visually stunning environments.",
+                  "image": "/images/team/arjun.png",
+                  "socials": {
+                    "linkedin": "#",
+                    "instagram": "#",
+                    "email": "#"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "Breadcrumb": {
+          "variants": {
+            "EventBreadcrumb1": {
+              "homeLabel": "Home"
+            }
+          }
+        },
+        "Pages": {
+          "variants": {
+            "AboutPage": {
+              "breadcrumbTitle": "About Us",
+              "breadcrumbBg": "/images/breadcrumb/breadcrumb.png",
+              "metaTitle": "About Us | Eventora",
+              "metaDesc": "Learn more about Eventora, our mission, vision, and the amazing team behind our extraordinary events."
+            },
+            "MissionPage": {
+              "metaTitle": "Our Mission | Event Management",
+              "metaDesc": "Learn about our mission and how we create events that leave lasting impressions.",
+              "breadcrumbTitle": "Our Mission"
+            },
+            "VisionPage": {
+              "metaTitle": "Our Vision | Event Management",
+              "metaDesc": "Learn about our vision and how we imagine events that inspire countless smiles.",
+              "breadcrumbTitle": "Our Vision"
+            },
+            "StoryPage": {
+              "metaTitle": "Our Story | Event Management",
+              "metaDesc": "Discover the story of EventBazaar.com.",
+              "breadcrumbTitle": "Our Story"
+            }
+          }
+        },
+        "OurMission": {
+          "variants": {
+            "EventOurMission1": {
+              "subtitle": "OUR MISSION",
+              "titleStart": "We Create Events",
+              "titleMid": "That Leave",
+              "titleCursive": "Lasting Impressions",
+              "desc1": "Our mission is to turn your ideas into extraordinary experiences that connect people, celebrate moments, and create memories that last a lifetime.",
+              "desc2": "We combine creativity, precision, and passion to deliver seamless events that reflect your vision and exceed your expectations—every single time.",
+              "image1": "/images/page-mission/2.png",
+              "image2": "/images/page-mission/1.png"
+            }
+          }
+        },
+        "OurVision": {
+          "variants": {
+            "EventOurVision1": {
+              "subtitle": "OUR VISION",
+              "titleStart": "We Imagine Events",
+              "titleMid": "That Inspire",
+              "titleCursive": "Countless Smiles",
+              "desc1": "Our vision is to be India's most trusted event partner—recognized for creativity, innovation, and flawless execution.",
+              "desc2": "We aspire to set new benchmarks in the event industry by creating extraordinary experiences that inspire, connect, and bring people together, today and for generations to come.",
+              "image1": "/images/page-mission/2.png",
+              "image2": "/images/page-mission/1.png"
+            }
+          }
+        },
+        "OurStory": {
+          "variants": {
+            "EventOurStory1": {
+              "subtitle": "OUR STORY",
+              "titleStart": "Our Story of Building",
+              "titleMid": "EventBazaar.com for",
+              "titleCursive": "Vendors and Users",
+              "desc1": "Discover the story of EventBazaar.com, India's first comprehensive event planning platform, bridging the gap between ideas and trusted vendors effortlessly.",
+              "desc2": "Welcome to EventBazaar.com - India's first comprehensive event industry platform. It helps you bridge the gap between your ideas and the finest and most trusted vendors in the market.",
+              "desc3": "Our mission is to connect clients with a diverse range of trusted vendors. From Event planners, caterers, decorators, photographers to many niche services like event entertainers, Designers, Stylist, Exhibition services, intelligent lights and many more - our platform ensures that every aspect of your event is covered.",
+              "desc4": "Whether you're planning a grand wedding, an intimate gathering, a corporate seminar, or a religious event, EventBazaar.com makes event planning effortless, efficient, and enjoyable.",
+              "image1": "/images/about/a1.png",
+              "image2": "/images/about/a2.png",
+              "image3": "/images/about/a3.png",
+              "image4": "/images/about/a4.png",
+              "image5": "/images/about/about-1.jpg"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,59 +2,38 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
-
-const services = [
-  {
-    id: 1,
-    title: "Wedding",
-    desc: "Beautifully planned weddings that reflect your love story and create memories for a lifetime.",
-    img: "/images/services/s1.png"
-  },
-  {
-    id: 2,
-    title: "Birthday",
-    desc: "Creative themes, fun setups and perfect planning to make every birthday extra special.",
-    img: "/images/services/s2.png"
-  },
-  {
-    id: 3,
-    title: "Corporate Events",
-    desc: "Professional events that inspire, engage and deliver results for your brand and business goals.",
-    img: "/images/services/s3.png"
-  },
-  {
-    id: 4,
-    title: "Engagement & Anniversary",
-    desc: "Celebrate your special moments with elegant setups and unforgettable experiences.",
-    img: "/images/services/s4.png"
-  },
-  {
-    id: 5,
-    title: "Baby Shower",
-    desc: "Adorable themes and joyful setups to celebrate the little one on the way with love and happiness.",
-    img: "/images/services/s5.png"
-  },
-  {
-    id: 6,
-    title: "Private Parties",
-    desc: "From intimate gatherings to grand celebrations, we create the perfect ambience for your special moments.",
-    img: "/images/services/s6.png"
-  },
-  {
-    id: 7,
-    title: "Award Ceremonies",
-    desc: "Recognize achievements in style with flawless planning and impactful ceremonies.",
-    img: "/images/services/s7.png"
-  },
-  {
-    id: 8,
-    title: "Fashion Shows",
-    desc: "High-energy runway shows with stunning production and attention to every detail.",
-    img: "/images/services/s8.png"
-  }
-];
+import data from "../../data/data.json";
+import { ServiceData } from "../../types";
 
 export default function Services() {
+  const servicesData = data.categories.Event.sections.Services.variants.EventServices1;
+  const services: ServiceData[] = servicesData.servicesList;
+
+  let subtitleLine1 = '';
+  let line2FirstPart = '';
+  let subtitleScriptPart = '';
+  let hasLineBreak = false;
+
+  if (servicesData.subtitle.includes('\n')) {
+    hasLineBreak = true;
+    const parts = servicesData.subtitle.split('\n');
+    subtitleLine1 = parts[0];
+    
+    if (parts[1].includes('*')) {
+      const line2Parts = parts[1].split('*');
+      line2FirstPart = line2Parts[0].trim();
+      subtitleScriptPart = line2Parts[1].trim();
+    } else {
+      const line2Words = (parts[1] || '').split(' ');
+      line2FirstPart = line2Words.slice(0, -1).join(' ');
+      subtitleScriptPart = line2Words[line2Words.length - 1] || '';
+    }
+  } else {
+    const subtitleWords = servicesData.subtitle.split(' ');
+    subtitleLine1 = subtitleWords.slice(0, -1).join(' ');
+    subtitleScriptPart = subtitleWords[subtitleWords.length - 1] || '';
+  }
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -81,7 +60,7 @@ export default function Services() {
         >
           <motion.div variants={itemVariants} className="flex flex-col items-center justify-center mb-1">
             <h4 className="text-[#be29ab] font-extrabold tracking-[0.25em] text-[16px] sm:text-[18px] uppercase mb-0.5">
-              OUR SERVICES
+              {servicesData.title}
             </h4>
             <div className="flex items-center gap-1 mt-0">
               <span className="w-8 h-[2px] bg-gradient-to-r from-[#be29ab] to-[#5129ea] inline-block rounded-full"></span>
@@ -91,32 +70,31 @@ export default function Services() {
             </div>
           </motion.div>
           
-          <motion.h2 variants={itemVariants} className="text-[34px] sm:text-[40px] lg:text-[52px] font-extrabold text-[#0b1021] leading-[1.05] tracking-[-0.02em]">
-            Comprehensive Solutions
-          </motion.h2>
-          
-          <motion.h3 variants={itemVariants} className="text-[34px] sm:text-[40px] lg:text-[52px] font-extrabold text-[#0b1021] mb-3 leading-[1.05] tracking-[-0.02em] flex flex-wrap justify-center items-center gap-x-2 gap-y-0">
-            For 
-            <span className="relative inline-block align-bottom">
-              <span className="font-dancing text-[40px] sm:text-[48px] lg:text-[68px] text-transparent bg-clip-text bg-gradient-to-r from-[#be29ab] to-[#5129ea] pr-3 pb-0 leading-none font-bold">
-                Unforgettable Events
+          <motion.h3 variants={itemVariants} className="text-[34px] sm:text-[40px] lg:text-[52px] font-extrabold text-[#0b1021] mb-3 leading-[1.05] tracking-[-0.02em] flex flex-wrap justify-center items-center gap-x-2 gap-y-0 mt-2">
+            {subtitleLine1} 
+            {hasLineBreak && <div className="w-full h-0"></div>}
+            {line2FirstPart}
+            {subtitleScriptPart && (
+              <span className="relative inline-block align-bottom ml-0 sm:ml-2">
+                <span className="font-dancing text-[40px] sm:text-[48px] lg:text-[68px] text-transparent bg-clip-text bg-gradient-to-r from-[#be29ab] to-[#5129ea] pr-3 pb-0 leading-none font-bold">
+                  {subtitleScriptPart}
+                </span>
+                {/* Curved underline SVG */}
+                <svg className="absolute bottom-0 left-[20%] w-[60%] h-[10px]" viewBox="0 0 100 20" preserveAspectRatio="none">
+                  <path d="M2,13 Q50,22 98,6" fill="none" stroke="url(#grad2)" strokeWidth="2.5" strokeLinecap="round"/>
+                  <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#be29ab" />
+                      <stop offset="100%" stopColor="#5129ea" />
+                    </linearGradient>
+                  </defs>
+                </svg>
               </span>
-              {/* Curved underline SVG */}
-              <svg className="absolute bottom-0 left-[35%] w-[50%] h-[10px]" viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M2,13 Q50,22 98,6" fill="none" stroke="url(#grad2)" strokeWidth="2.5" strokeLinecap="round"/>
-                <defs>
-                  <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#be29ab" />
-                    <stop offset="100%" stopColor="#5129ea" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </span>
+            )}
           </motion.h3>
           
-          <motion.p variants={itemVariants} className="text-[#191c49] max-w-2xl leading-relaxed text-[16px] sm:text-[17px] font-medium mx-auto mt-1">
-            From concept to celebration, we handle every detail<br className="hidden sm:block"/>
-            to create seamless and memorable experiences.
+          <motion.p variants={itemVariants} className="text-[#191c49] max-w-2xl leading-relaxed text-[16px] sm:text-[17px] font-medium mx-auto mt-2 whitespace-pre-line">
+            {servicesData.desc}
           </motion.p>
         </motion.div>
 
@@ -155,7 +133,7 @@ export default function Services() {
           viewport={{ once: true }}
         >
           <button className="cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-7 pr-3 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity flex items-center gap-4 shadow-[0_8px_25px_rgba(91,40,231,0.35)]">
-            <span className="text-[15px]">Explore All Services</span>
+            <span className="text-[15px]">{servicesData.button?.label || "Explore All Services"}</span>
             <span className="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center shrink-0">
               <ArrowRight size={16} strokeWidth={2} />
             </span>
@@ -165,3 +143,4 @@ export default function Services() {
     </section>
   );
 }
+

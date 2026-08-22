@@ -3,6 +3,7 @@
 import { Calendar, HeartHandshake, Users, Award } from "lucide-react";
 import { motion, useInView, useMotionValue, useSpring, useTransform, Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
+import data from "../../data/data.json";
 
 function Counter({ from, to }: { from: number; to: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -27,12 +28,22 @@ function Counter({ from, to }: { from: number; to: number }) {
 }
 
 export default function Stats() {
-  const stats = [
-    { icon: Calendar, value: 850, suffix: "+", label: "Events Completed" },
-    { icon: HeartHandshake, value: 650, suffix: "+", label: "Happy Clients" },
-    { icon: Users, value: 120, suffix: "+", label: "Team Members" },
-    { icon: Award, value: 8, suffix: "+", label: "Years Experience" },
-  ];
+  const statsData = data.categories.Event.sections.Stats.variants.EventStats1;
+
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Calendar": return Calendar;
+      case "HeartHandshake": return HeartHandshake;
+      case "Users": return Users;
+      case "Award": return Award;
+      default: return Calendar;
+    }
+  };
+
+  const stats = statsData.statsList.map((stat: { icon: string; value: number; suffix: string; label: string }) => ({
+    ...stat,
+    icon: getIcon(stat.icon)
+  }));
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -61,7 +72,7 @@ export default function Stats() {
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
         >
-          {stats.map((stat, idx) => (
+          {stats.map((stat: { icon: any, value: number, suffix: string, label: string }, idx: number) => (
             <motion.div 
               key={idx} 
               className="bg-[#0b0410]/60 border border-white/20 rounded-[12px] py-4 px-3 sm:py-12 sm:px-6 flex items-center justify-center gap-2 sm:gap-4 xl:gap-6 backdrop-blur-md"

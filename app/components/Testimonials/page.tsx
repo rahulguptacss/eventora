@@ -3,45 +3,15 @@
 import React, { useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import data from "../../data/data.json";
 
 export default function Testimonials() {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Williams",
-      role: "Wedding Client",
-      image: "/images/testimonials/testimonial-1.jpg",
-      text: "From the initial planning to the final execution, Eventora made everything seamless and stress-free. The team was professional, creative, and truly cared about every little detail. Our event was beyond our expectations!"
-    },
-    {
-      id: 2,
-      name: "Jacob Wallace",
-      role: "Corporate Client",
-      image: "/images/testimonials/testimonial-2.jpg",
-      text: "From the initial planning to the final execution, Eventora made everything seamless and stress-free. The team was professional, creative, and truly cared about every little detail. Our event was beyond our expectations!"
-    },
-    {
-      id: 3,
-      name: "Emily Chen",
-      role: "Birthday Party",
-      image: "/images/testimonials/3.jpg",
-      text: "Eventora took our vision and turned it into reality! Every detail was perfect, and the atmosphere they created was magical. I highly recommend them for any special occasion."
-    },
-    {
-      id: 4,
-      name: "Michael Brown",
-      role: "Conference Organizer",
-      image: "/images/testimonials/4.jpg",
-      text: "The level of professionalism and dedication from the Eventora team was outstanding. Our annual conference ran smoother than ever before. Fantastic service from start to finish!"
-    },
-    {
-      id: 5,
-      name: "Olivia & James",
-      role: "Anniversary Celebration",
-      image: "/images/testimonials/5.jpg",
-      text: "We wanted a memorable night, and Eventora delivered exactly that. From the beautiful decorations to the flawless catering coordination, everything was handled beautifully."
-    }
-  ];
+  const testimonialData = data.categories.Event.sections.Testimonial.variants.EventTestimonial1;
+  const testimonials = testimonialData.testimonialsList;
+
+  const subtitleWords = testimonialData.subtitle.split(' ');
+  const subtitleLastWord = subtitleWords.pop() || '';
+  const subtitleFirstPart = subtitleWords.join(' ');
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -65,7 +35,7 @@ export default function Testimonials() {
         >
           <div className="flex flex-col items-center justify-center mb-2">
             <h4 className="text-purple-600 font-bold tracking-[0.2em] text-[16px] md:text-[18px] uppercase mb-1">
-              OUR TESTIMONIALS
+              {testimonialData.title}
             </h4>
             <div className="flex items-center gap-2">
               <span className="w-12 h-[2px] bg-pink-500 rounded-full"></span>
@@ -74,11 +44,11 @@ export default function Testimonials() {
             </div>
           </div>
           <h2 className="text-[42px] md:text-[56px] font-bold text-[#0b0410] leading-tight mb-0">
-            What Our Clients Say About
+            {subtitleFirstPart}
           </h2>
           <div className="relative inline-block mb-4 -mt-2 md:-mt-4">
             <h3 className="text-[80px] md:text-[100px] font-dancing font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600 leading-none pb-2 px-2">
-              Eventora
+              {subtitleLastWord}
             </h3>
             <svg className="absolute bottom-2 left-0 w-full h-[12px]" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 10 Q 100 2 196 10" stroke="url(#paint0_linear)" strokeWidth="2.5" strokeLinecap="round" />
@@ -91,7 +61,7 @@ export default function Testimonials() {
             </svg>
           </div>
           <p className="text-[#191c49] font-medium text-[17px] max-w-[650px] mx-auto leading-relaxed">
-            Real experiences, genuine feedback, and lasting impressions <br className="hidden md:block" /> from clients who trusted us with their special moments.
+            {testimonialData.desc}
           </p>
         </motion.div>
 

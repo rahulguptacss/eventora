@@ -1,14 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Topbar from "../Topbar/page";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import data from "../../data/data.json";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
+  const pathname = usePathname();
+  const headerData = data.categories.Event.sections.Header.variants.EventHeader1;
+  const logoImage = headerData.logoImage;
 
   return (
     <>
@@ -23,61 +29,160 @@ export default function Header() {
       >
         
         {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image src="/images/logo.png" alt="Eventora Logo" width={300} height={80} className="h-[50px] md:h-[65px] w-auto object-contain" />
+        <Link href="/" className="flex items-center gap-2">
+          {logoImage && logoImage !== "" ? (
+            <div className="flex items-center gap-2">
+              <img src={logoImage} alt={headerData.logo || "Logo"} className="h-[50px] md:h-[65px] w-auto object-contain" />
+            </div>
+          ) : (
+            <span className="text-2xl font-extrabold text-[#140830] tracking-tight">{headerData.logo}</span>
+          )}
         </Link>
 
         {/* Navigation Links - Desktop */}
         <ul className="hidden lg:flex items-center gap-7 text-[15px] font-bold text-[#140830]">
-          <li><Link href="/" className="bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white px-7 py-3 rounded-full">HOME</Link></li>
-          <li><Link href="#about" className="hover:text-[#d1135c] transition-colors">ABOUT</Link></li>
-          <li><Link href="#services" className="hover:text-[#d1135c] transition-colors">SERVICES</Link></li>
-          <li><Link href="#events" className="hover:text-[#d1135c] transition-colors">EVENTS</Link></li>
-          <li><Link href="#gallery" className="hover:text-[#d1135c] transition-colors">GALLERY</Link></li>
-          <li><Link href="#faq" className="hover:text-[#d1135c] transition-colors">FAQ</Link></li>
-          <li><Link href="#blog" className="hover:text-[#d1135c] transition-colors">BLOG</Link></li>
-          <li><Link href="#contact" className="hover:text-[#d1135c] transition-colors">CONTACT</Link></li>
+          {headerData.menu.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <li key={index} className="relative group">
+                <Link 
+                  href={item.href} 
+                  className={isActive ? "bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white px-7 py-3 rounded-full" : "hover:text-[#d1135c] transition-colors"}
+                >
+                  {item.label.toUpperCase()}
+                </Link>
+                {item.subItems && (
+                  <div className="absolute left-0 top-full pt-4 w-48 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 z-50">
+                    <ul className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl py-2">
+                      {item.subItems.map((subItem: any, subIndex: number) => (
+                        <li key={subIndex}>
+                          <Link href={subItem.href} className="block px-5 py-2.5 hover:text-[#d1135c] hover:bg-gray-50 text-[#140830] transition-colors">
+                            {subItem.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-4">
           {/* Get A Quote Button - Desktop */}
-          <button className="hidden md:flex items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-3 rounded-full font-bold text-[16px] hover:shadow-lg hover:shadow-pink-500/30 transition-all cursor-pointer">
-            Get A Quote
-            <span className="w-7 h-7 rounded-full border-2 border-white/80 flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </button>
+          {headerData.buttons && headerData.buttons.length > 0 && (
+            <Link href={headerData.buttons[0].href} className="hidden md:flex items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-3 rounded-full font-bold text-[16px] hover:shadow-lg hover:shadow-pink-500/30 transition-all cursor-pointer">
+              {headerData.buttons[0].label}
+              <span className="w-7 h-7 rounded-full border-2 border-white/80 flex items-center justify-center">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </Link>
+          )}
 
           {/* Mobile Menu Toggle Button */}
           <button 
-            className="lg:hidden text-[#140830] p-2 focus:outline-none" 
+            className="lg:hidden p-2 focus:outline-none" 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6l12 12" stroke="url(#close_gradient)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <defs>
+                  <linearGradient id="close_gradient" x1="6" y1="6" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#6a11cb"/>
+                    <stop offset="1" stopColor="#ff0f7b"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            ) : (
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="url(#menu_gradient)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <defs>
+                  <linearGradient id="menu_gradient" x1="4" y1="12" x2="20" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#ff0f7b"/>
+                    <stop offset="1" stopColor="#6a11cb"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            )}
           </button>
         </div>
       </motion.header>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-white pt-[120px] px-6 overflow-y-auto pb-8">
-          <ul className="flex flex-col gap-6 text-[18px] font-bold text-[#140830]">
-            <li><Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-[#d1135c]">HOME</Link></li>
-            <li><Link href="#about" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link></li>
-            <li><Link href="#services" onClick={() => setIsMobileMenuOpen(false)}>SERVICES</Link></li>
-            <li><Link href="#events" onClick={() => setIsMobileMenuOpen(false)}>EVENTS</Link></li>
-            <li><Link href="#gallery" onClick={() => setIsMobileMenuOpen(false)}>GALLERY</Link></li>
-            <li><Link href="#faq" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link></li>
-            <li><Link href="#blog" onClick={() => setIsMobileMenuOpen(false)}>BLOG</Link></li>
-            <li><Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>CONTACT</Link></li>
-            <li className="pt-4">
-              <button className="w-full flex justify-center items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-4 rounded-full font-bold text-[16px]">
-                Get A Quote
-              </button>
-            </li>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden fixed inset-0 z-40 bg-white pt-[120px] px-6 overflow-y-auto pb-8"
+          >
+            <ul className="flex flex-col gap-6 text-[18px] font-bold text-[#140830]">
+            {headerData.menu.map((item, index) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={index} className="flex flex-col">
+                  <div className="flex items-center justify-between w-full">
+                    <Link 
+                      href={item.href} 
+                      onClick={() => setIsMobileMenuOpen(false)} 
+                      className={isActive ? "text-[#d1135c]" : ""}
+                    >
+                      {item.label.toUpperCase()}
+                    </Link>
+                    {item.subItems && (
+                      <button 
+                        onClick={() => setOpenSubmenuIndex(openSubmenuIndex === index ? null : index)}
+                        className="p-1 text-gray-500 hover:text-[#d1135c]"
+                      >
+                        <svg className={`w-6 h-6 transition-transform duration-300 ${openSubmenuIndex === index ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  <AnimatePresence>
+                    {item.subItems && openSubmenuIndex === index && (
+                      <motion.ul 
+                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                        animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="flex flex-col gap-4 pl-4 border-l-2 border-gray-100 overflow-hidden"
+                      >
+                        {item.subItems.map((subItem: any, subIndex: number) => (
+                          <li key={subIndex}>
+                            <Link 
+                              href={subItem.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className={pathname === subItem.href ? "text-[#d1135c] text-[16px]" : "text-[16px] text-gray-600 hover:text-[#d1135c]"}
+                            >
+                              {subItem.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+            
+            {headerData.buttons && headerData.buttons.length > 0 && (
+              <li className="pt-4">
+                <Link href={headerData.buttons[0].href} onClick={() => setIsMobileMenuOpen(false)} className="w-full flex justify-center items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-4 rounded-full font-bold text-[16px]">
+                  {headerData.buttons[0].label}
+                </Link>
+              </li>
+            )}
           </ul>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
+
