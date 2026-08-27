@@ -2,6 +2,7 @@
 
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import data from "../../data/data.json";
 
 interface BlogItem {
@@ -121,12 +122,12 @@ export default function Blog() {
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <button className="inline-flex items-center justify-between w-[240px] bg-gradient-to-r from-pink-500 to-purple-600 text-white pl-10 pr-2 py-2 rounded-full text-[16px] font-medium hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/30 cursor-pointer">
+          <Link href={blogData.button?.href || "/blog"} className="inline-flex items-center justify-between w-[240px] bg-gradient-to-r from-pink-500 to-purple-600 text-white pl-10 pr-2 py-2 rounded-full text-[16px] font-medium hover:opacity-90 transition-opacity shadow-lg shadow-purple-500/30 cursor-pointer">
             <span>{blogData.button?.label || "View All Blogs"}</span>
             <span className="w-9 h-9 flex items-center justify-center rounded-full border border-white/90 shrink-0">
               <ArrowRight size={16} />
             </span>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

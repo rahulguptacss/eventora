@@ -2,7 +2,9 @@
 
 import { Lightbulb, Users, Calendar, Award, ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import Link from "next/link";
 import data from "../../data/data.json";
+import { AboutFeature } from '../../types';
 
 export default function AboutUs() {
   const aboutData = data.categories.Event.sections.About.variants.EventAbout1;
@@ -40,7 +42,7 @@ export default function AboutUs() {
     }
   };
 
-  const features = aboutData.features ? aboutData.features.map((f: any) => ({
+  const features = aboutData.features ? aboutData.features.map((f: AboutFeature) => ({
     ...f,
     icon: getIcon(f.icon)
   })) : [];
@@ -129,12 +131,14 @@ export default function AboutUs() {
             
             {/* Desktop Button */}
             <div className="hidden lg:flex sm:justify-start justify-center mt-2">
-              <motion.button variants={fadeUpVariants} className="group cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-8 pr-2.5 py-2.5 rounded-full font-bold hover:shadow-[0_10px_30px_rgba(81,41,234,0.5)] transition-all flex items-center gap-5 shadow-[0_8px_25px_rgba(81,41,234,0.35)]">
-                <span className="text-[15px] tracking-wide">{aboutData.button?.label || "Explore More About Us"}</span>
-                <span className="w-9 h-9 rounded-full border border-white/30 group-hover:border-white/60 flex items-center justify-center shrink-0 transition-colors">
-                  <ArrowRight size={16} strokeWidth={2.5} />
-                </span>
-              </motion.button>
+              <Link href={aboutData.button?.href || "/about"}>
+                <motion.div variants={fadeUpVariants} className="group cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-8 pr-2.5 py-2.5 rounded-full font-bold hover:shadow-[0_10px_30px_rgba(81,41,234,0.5)] transition-all flex items-center gap-5 shadow-[0_8px_25px_rgba(81,41,234,0.35)]">
+                  <span className="text-[15px] tracking-wide">{aboutData.button?.label || "Explore More About Us"}</span>
+                  <span className="w-9 h-9 rounded-full border border-white/30 group-hover:border-white/60 flex items-center justify-center shrink-0 transition-colors">
+                    <ArrowRight size={16} strokeWidth={2.5} />
+                  </span>
+                </motion.div>
+              </Link>
             </div>
           </motion.div>
           
@@ -174,18 +178,20 @@ export default function AboutUs() {
           
           {/* Mobile Button (below images) */}
           <div className="flex lg:hidden justify-center mt-4 sm:mt-6 w-full">
-            <motion.button 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className="group cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-8 pr-2.5 py-2.5 rounded-full font-bold hover:shadow-[0_10px_30px_rgba(81,41,234,0.5)] transition-all flex items-center gap-5 shadow-[0_8px_25px_rgba(81,41,234,0.35)]"
-            >
-              <span className="text-[15px] tracking-wide">{aboutData.button?.label || "Explore More About Us"}</span>
-              <span className="w-9 h-9 rounded-full border border-white/30 group-hover:border-white/60 flex items-center justify-center shrink-0 transition-colors">
-                <ArrowRight size={16} strokeWidth={2.5} />
-              </span>
-            </motion.button>
+            <Link href={aboutData.button?.href || "/about"}>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: true }}
+                className="group cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-8 pr-2.5 py-2.5 rounded-full font-bold hover:shadow-[0_10px_30px_rgba(81,41,234,0.5)] transition-all flex items-center gap-5 shadow-[0_8px_25px_rgba(81,41,234,0.35)]"
+              >
+                <span className="text-[15px] tracking-wide">{aboutData.button?.label || "Explore More About Us"}</span>
+                <span className="w-9 h-9 rounded-full border border-white/30 group-hover:border-white/60 flex items-center justify-center shrink-0 transition-colors">
+                  <ArrowRight size={16} strokeWidth={2.5} />
+                </span>
+              </motion.div>
+            </Link>
           </div>
           
         </div>

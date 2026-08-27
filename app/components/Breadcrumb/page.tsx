@@ -8,11 +8,17 @@ import data from "../../data/data.json";
 interface BreadcrumbProps {
   title: string;
   backgroundImage?: string;
+  parentTitle?: string;
+  parentHref?: string;
+  currentTitle?: string;
 }
 
 export default function Breadcrumb({ 
   title, 
-  backgroundImage
+  backgroundImage,
+  parentTitle,
+  parentHref,
+  currentTitle
 }: BreadcrumbProps) {
   const breadcrumbData = data.categories.Event.sections.Breadcrumb.variants.EventBreadcrumb1;
   const pageData = data.categories.Event.sections.Pages.variants.AboutPage;
@@ -43,7 +49,13 @@ export default function Breadcrumb({
           <div className="flex items-center gap-3 text-[14px] md:text-[16px] font-bold text-white">
             <Link href="/" className="hover:text-[#d1135c] transition-colors">{breadcrumbData.homeLabel}</Link>
             <FaPlay size={10} className="text-[#d1135c]" />
-            <span className="text-[#d1135c]">{title}</span>
+            {parentTitle && parentHref && (
+              <>
+                <Link href={parentHref} className="hover:text-[#d1135c] transition-colors">{parentTitle}</Link>
+                <FaPlay size={10} className="text-[#d1135c]" />
+              </>
+            )}
+            <span className="text-[#d1135c]">{currentTitle || title}</span>
           </div>
         </motion.div>
       </div>

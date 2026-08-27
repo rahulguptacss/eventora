@@ -1,11 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import data from "../../data/data.json";
 import { ServiceData } from "../../types";
 
-export default function Services() {
+interface ServicesProps {
+  showButton?: boolean;
+}
+
+export default function Services({ showButton = true }: ServicesProps = {}) {
   const servicesData = data.categories.Event.sections.Services.variants.EventServices1;
   const services: ServiceData[] = servicesData.servicesList;
 
@@ -107,38 +112,42 @@ export default function Services() {
         >
           {services.map((service) => (
             <motion.div key={service.id} variants={itemVariants} className="bg-white rounded-[16px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col group border border-gray-50">
-              <div className="h-[180px] sm:h-[200px] overflow-hidden relative">
-                <img 
-                  src={service.img} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
-              <div className="p-5 sm:p-6 flex flex-col flex-grow bg-white">
-                <h4 className="text-[16px] sm:text-[17px] font-bold text-[#0f172a] mb-2 group-hover:text-[#5129ea] transition-colors">{service.title}</h4>
-                <div className="w-8 h-[2px] bg-gradient-to-r from-[#be29ab] to-[#5129ea] rounded-full mb-3 sm:mb-4"></div>
-                <p className="text-[#262755] text-[12px] sm:text-[13px] font-medium leading-relaxed">
-                  {service.desc}
-                </p>
-              </div>
+              <Link href={`/services/${service.id}`} className="flex flex-col flex-grow">
+                <div className="h-[180px] sm:h-[200px] overflow-hidden relative">
+                  <img 
+                    src={service.img} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-5 sm:p-6 flex flex-col flex-grow bg-white">
+                  <h4 className="text-[16px] sm:text-[17px] font-bold text-[#0f172a] mb-2 group-hover:text-[#5129ea] transition-colors">{service.title}</h4>
+                  <div className="w-8 h-[2px] bg-gradient-to-r from-[#be29ab] to-[#5129ea] rounded-full mb-3 sm:mb-4"></div>
+                  <p className="text-[#262755] text-[12px] sm:text-[13px] font-medium leading-relaxed">
+                    {service.desc}
+                  </p>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
 
-        <motion.div 
-          className="mt-8 flex justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <button className="cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-7 pr-3 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity flex items-center gap-4 shadow-[0_8px_25px_rgba(91,40,231,0.35)]">
-            <span className="text-[15px]">{servicesData.button?.label || "Explore All Services"}</span>
-            <span className="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center shrink-0">
-              <ArrowRight size={16} strokeWidth={2} />
-            </span>
-          </button>
-        </motion.div>
+        {showButton && (
+          <motion.div 
+            className="mt-8 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <Link href={servicesData.button?.href || "/services"} className="cursor-pointer bg-gradient-to-r from-[#be29ab] to-[#5129ea] text-white pl-7 pr-3 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity flex items-center gap-4 shadow-[0_8px_25px_rgba(91,40,231,0.35)]">
+              <span className="text-[15px]">{servicesData.button?.label || "Explore All Services"}</span>
+              <span className="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center shrink-0">
+                <ArrowRight size={16} strokeWidth={2} />
+              </span>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );

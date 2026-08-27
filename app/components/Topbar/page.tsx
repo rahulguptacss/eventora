@@ -82,6 +82,8 @@ export default function Topbar() {
               key={index}
               variants={itemVariants} 
               href={social.href} 
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-white hover:scale-125 transition-transform"
             >
               {getIcon(social.label)}

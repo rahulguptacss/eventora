@@ -1,0 +1,153 @@
+"use client";
+
+import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+import data from "../data/data.json";
+
+interface BlogItem {
+  id: number;
+  title: string;
+  tag: string;
+  date: string;
+  image: string;
+}
+
+export default function BlogGrid() {
+  const blogsData = data.categories.Event.sections.BlogGrid.variants.BlogGrid1;
+  const blogs: BlogItem[] = blogsData.blogs;
+  return (
+    <section id="blog-grid" className="pt-10 pb-12 bg-white">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <motion.div
+          className="text-center max-w-4xl mx-auto mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          <div className="flex flex-col items-center justify-center mb-2">
+            <h4 className="text-purple-600 font-bold tracking-[0.2em] text-[16px] md:text-[18px] uppercase mb-1">
+              OUR BLOGS
+            </h4>
+            <div className="flex items-center gap-2">
+              <span className="w-12 h-[2px] bg-pink-500 rounded-full"></span>
+              <span className="text-purple-600 text-[16px]">✦</span>
+              <span className="w-12 h-[2px] bg-purple-600 rounded-full"></span>
+            </div>
+          </div>
+          <h2 className="text-[42px] md:text-[56px] font-bold text-[#0b0410] leading-tight mb-0">
+            Latest Ideas & Inspiration For
+          </h2>
+          <div className="mb-4 mt-0 md:-mt-1">
+            <h3 className="text-[80px] md:text-[100px] font-dancing font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600 leading-none pb-2 px-2">
+              <span className="relative inline-block">
+                Unforgettable Events
+                <svg className="absolute -bottom-2 left-[36%] w-[34%] h-[12px]" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 10 Q 100 2 196 10" stroke="url(#paint0_linear)" strokeWidth="2.5" strokeLinecap="round" />
+                  <defs>
+                    <linearGradient id="paint0_linear" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#ec4899" />
+                      <stop offset="1" stopColor="#9333ea" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h3>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+        >
+          {blogs.map((blog: BlogItem) => (
+            <motion.div
+              key={blog.id}
+              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group flex flex-col"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              }}
+            >
+              <div className="relative h-56 md:h-64 overflow-hidden">
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute bottom-4 left-4 md:left-6 md:bottom-6">
+                  <span className="bg-[#cd174a] text-white text-[13px] font-bold px-5 py-2 rounded uppercase tracking-widest">
+                    {blog.tag}
+                  </span>
+                </div>
+              </div>
+              <div className="p-5 md:p-6 flex-1 flex flex-col">
+                <Link href={`/blog/${blog.id}`}>
+                  <h4 className="text-[20px] md:text-[22px] font-bold text-[#0b0410] mb-4 hover:text-pink-500 transition-colors cursor-pointer leading-snug">
+                    {blog.title}
+                  </h4>
+                </Link>
+                <div className="flex items-center justify-between text-[14px] mt-auto">
+                  <div className="flex items-center gap-2 text-[#cd174a] font-medium">
+                    <Calendar size={16} className="text-[#cd174a]" />
+                    <span>{blog.date}</span>
+                  </div>
+                  <Link href={`/blog/${blog.id}`} className="text-[#cd174a] font-medium hover:text-purple-600 transition-colors border-b border-[#cd174a] pb-[1px]">
+                    Read More
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Pagination */}
+        <motion.div 
+          className="flex justify-center items-center gap-2 mt-8 flex-wrap"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <button className="flex items-center justify-center gap-1 px-4 py-2 rounded-full border border-gray-200 text-purple-600 font-medium hover:bg-purple-50 transition-colors cursor-pointer">
+            <ChevronLeft size={16} /> Previous
+          </button>
+          
+          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-600 text-white font-medium shadow-md shadow-purple-600/30 cursor-pointer">
+            1
+          </button>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+            2
+          </button>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors hidden sm:flex cursor-pointer">
+            3
+          </button>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors hidden sm:flex cursor-pointer">
+            4
+          </button>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors hidden sm:flex cursor-pointer">
+            5
+          </button>
+          <span className="w-8 h-10 flex items-center justify-center text-gray-400">
+            ...
+          </span>
+          <button className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+            10
+          </button>
+          
+          <button className="flex items-center justify-center gap-1 px-4 py-2 rounded-full border border-gray-200 text-purple-600 font-medium hover:bg-purple-50 transition-colors cursor-pointer">
+            Next <ChevronRight size={16} />
+          </button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

@@ -19,7 +19,7 @@ export default function StoryPage() {
       <main>
         <Breadcrumb title={pageData.breadcrumbTitle} />
         <OurStory />
-        <Team />
+        <Team limit={3} />
       </main>
       <Footer />
     </>

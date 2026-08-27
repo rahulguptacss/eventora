@@ -162,7 +162,7 @@ export default function Footer() {
 
             <div className="flex gap-3">
               {socialLinks.map((social, idx) => (
-                <a key={idx} href={social.href} className="w-10 h-10 rounded-full border border-[#332b40] flex items-center justify-center text-white hover:bg-pink-600 hover:border-pink-600 transition-all">
+                <a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#332b40] flex items-center justify-center text-white hover:bg-pink-600 hover:border-pink-600 transition-all">
                   {getSocialIcon(social.label)}
                 </a>
               ))}

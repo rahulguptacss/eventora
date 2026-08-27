@@ -8,6 +8,7 @@ import Topbar from "../Topbar/page";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import data from "../../data/data.json";
+import { MenuItem } from '../../types';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function Header() {
         </Link>
 
         {/* Navigation Links - Desktop */}
-        <ul className="hidden lg:flex items-center gap-7 text-[15px] font-bold text-[#140830]">
+        <ul className="hidden lg:flex items-center gap-7 text-[15px] font-[600] text-[#140830]">
           {headerData.menu.map((item, index) => {
             const isActive = pathname === item.href;
             return (
@@ -54,7 +55,7 @@ export default function Header() {
                 {item.subItems && (
                   <div className="absolute left-0 top-full pt-4 w-48 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 z-50">
                     <ul className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl py-2">
-                      {item.subItems.map((subItem: any, subIndex: number) => (
+                      {item.subItems.map((subItem: MenuItem, subIndex: number) => (
                         <li key={subIndex}>
                           <Link href={subItem.href} className="block px-5 py-2.5 hover:text-[#d1135c] hover:bg-gray-50 text-[#140830] transition-colors">
                             {subItem.label}
@@ -118,47 +119,52 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden fixed inset-0 z-40 bg-white pt-[120px] px-6 overflow-y-auto pb-8"
+            className="lg:hidden fixed inset-0 z-40 bg-white pt-[140px] px-8 overflow-y-auto pb-8"
           >
-            <ul className="flex flex-col gap-6 text-[18px] font-bold text-[#140830]">
+            <ul className="flex flex-col text-[18px] font-[600] text-[#140830]">
             {headerData.menu.map((item, index) => {
               const isActive = pathname === item.href;
+              const hasSubmenu = !!item.subItems;
+              const isSubmenuOpen = openSubmenuIndex === index;
+              
               return (
-                <li key={index} className="flex flex-col">
+                <li key={index} className="flex flex-col py-4 border-b border-gray-50 last:border-0">
                   <div className="flex items-center justify-between w-full">
                     <Link 
                       href={item.href} 
-                      onClick={() => setIsMobileMenuOpen(false)} 
-                      className={isActive ? "text-[#d1135c]" : ""}
+                      onClick={() => !hasSubmenu && setIsMobileMenuOpen(false)} 
+                      className={`${isActive ? "text-[#d1135c]" : "hover:text-[#d1135c]"} transition-colors uppercase`}
                     >
-                      {item.label.toUpperCase()}
+                      {item.label}
                     </Link>
-                    {item.subItems && (
+                    {hasSubmenu && (
                       <button 
-                        onClick={() => setOpenSubmenuIndex(openSubmenuIndex === index ? null : index)}
-                        className="p-1 text-gray-500 hover:text-[#d1135c]"
+                        onClick={() => setOpenSubmenuIndex(isSubmenuOpen ? null : index)}
+                        className="p-2 text-gray-500 hover:text-[#d1135c] transition-colors flex items-center justify-center"
                       >
-                        <svg className={`w-6 h-6 transition-transform duration-300 ${openSubmenuIndex === index ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                        {isSubmenuOpen ? (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>
+                        ) : (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        )}
                       </button>
                     )}
                   </div>
                   <AnimatePresence>
-                    {item.subItems && openSubmenuIndex === index && (
+                    {hasSubmenu && isSubmenuOpen && (
                       <motion.ul 
                         initial={{ height: 0, opacity: 0, marginTop: 0 }}
                         animate={{ height: "auto", opacity: 1, marginTop: 16 }}
                         exit={{ height: 0, opacity: 0, marginTop: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="flex flex-col gap-4 pl-4 border-l-2 border-gray-100 overflow-hidden"
+                        className="flex flex-col gap-4 pl-4 overflow-hidden"
                       >
-                        {item.subItems.map((subItem: any, subIndex: number) => (
+                        {item.subItems.map((subItem: MenuItem, subIndex: number) => (
                           <li key={subIndex}>
                             <Link 
                               href={subItem.href}
                               onClick={() => setIsMobileMenuOpen(false)}
-                              className={pathname === subItem.href ? "text-[#d1135c] text-[16px]" : "text-[16px] text-gray-600 hover:text-[#d1135c]"}
+                              className={pathname === subItem.href ? "text-[#d1135c] text-[16px] font-[600]" : "text-[16px] font-[600] text-gray-600 hover:text-[#d1135c] transition-colors"}
                             >
                               {subItem.label}
                             </Link>
@@ -172,9 +178,12 @@ export default function Header() {
             })}
             
             {headerData.buttons && headerData.buttons.length > 0 && (
-              <li className="pt-4">
-                <Link href={headerData.buttons[0].href} onClick={() => setIsMobileMenuOpen(false)} className="w-full flex justify-center items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-4 rounded-full font-bold text-[16px]">
+              <li className="pt-8">
+                <Link href={headerData.buttons[0].href} onClick={() => setIsMobileMenuOpen(false)} className="w-full flex justify-center items-center gap-3 bg-gradient-to-r from-[#be29ab] via-[#be29ab] to-[#5129ea] text-white px-8 py-3.5 rounded-full font-bold text-[15px]">
                   {headerData.buttons[0].label}
+                  <span className="w-6 h-6 rounded-full border-2 border-white/80 flex items-center justify-center">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </span>
                 </Link>
               </li>
             )}
