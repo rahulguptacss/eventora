@@ -86,11 +86,13 @@ export default function Blog() {
               }}
             >
               <div className="relative h-56 md:h-64 overflow-hidden">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                <Link href={`/blog/${blog.id}`}>
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </Link>
                 <div className="absolute bottom-4 left-4 md:left-6 md:bottom-6">
                   <span className="bg-[#cd174a] text-white text-[13px] font-bold px-5 py-2 rounded uppercase tracking-widest">
                     {blog.tag}
@@ -98,17 +100,19 @@ export default function Blog() {
                 </div>
               </div>
               <div className="p-5 md:p-6 flex-1 flex flex-col">
-                <h4 className="text-[20px] md:text-[22px] font-bold text-[#0b0410] mb-4 hover:text-pink-500 transition-colors cursor-pointer leading-snug">
-                  {blog.title}
-                </h4>
+                <Link href={`/blog/${blog.id}`}>
+                  <h4 className="text-[20px] md:text-[22px] font-bold text-[#0b0410] mb-4 hover:text-pink-500 transition-colors cursor-pointer leading-snug">
+                    {blog.title}
+                  </h4>
+                </Link>
                 <div className="flex items-center justify-between text-[14px] mt-auto">
                   <div className="flex items-center gap-2 text-[#cd174a] font-medium">
                     <Calendar size={16} className="text-[#cd174a]" />
                     <span>{blog.date}</span>
                   </div>
-                  <a href="#" className="text-[#cd174a] font-medium hover:text-purple-600 transition-colors border-b border-[#cd174a] pb-[1px]">
+                  <Link href={`/blog/${blog.id}`} className="text-[#cd174a] font-medium hover:text-purple-600 transition-colors border-b border-[#cd174a] pb-[1px]">
                     {blogData.readMoreText || "Read More"}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

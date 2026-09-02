@@ -24,7 +24,7 @@ export default function AboutPage() {
         <AboutUs />
         <Mission />
         <Vision />
-        <Team />
+        <Team limit={3} />
       </main>
       <Footer />
     </>

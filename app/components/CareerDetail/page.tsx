@@ -76,9 +76,7 @@ function CareerDetailContent({ id }: { id: string }) {
                 {job.desc}
               </p>
 
-              <button className="inline-flex items-center gap-2 lg:gap-3 bg-gradient-to-r from-[#e32879] to-[#9333ea] hover:opacity-90 text-white font-semibold px-6 py-3 lg:px-10 lg:py-4 rounded-xl transition-opacity cursor-pointer text-[15px] lg:text-[18px]">
-                {detailData.applyBtn} <Send className="w-4 h-4 lg:w-5 lg:h-5" />
-              </button>
+
             </motion.div>
 
             <motion.div

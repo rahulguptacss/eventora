@@ -114,7 +114,7 @@ export default function BlogDetailsClient({ id }: { id: string }) {
               
               <div className="space-y-5 mb-5">
                 {sidebarData.popularPosts.map((post: BlogData, idx: number) => (
-                  <Link href="#" key={idx} className="flex gap-4 group items-center">
+                  <Link href={`/blog/${post.id || 1}`} key={idx} className="flex gap-4 group items-center">
                     <div className="w-[75px] h-[75px] shrink-0 rounded-[14px] overflow-hidden shadow-sm">
                       <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
