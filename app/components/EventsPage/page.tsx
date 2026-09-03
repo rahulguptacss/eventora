@@ -18,7 +18,16 @@ export default function EventsPage() {
     ? pageData.events 
     : pageData.events.filter((event: EventData) => event.category === activeCategory);
 
-  const totalPages = pageData.pagination.totalPages;
+  const ITEMS_PER_PAGE = 6;
+  const totalPages = Math.ceil(filteredEvents.length / ITEMS_PER_PAGE) || 1;
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentEvents = filteredEvents.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <section className="pt-10 md:pt-16 pb-16 md:pb-24 bg-white font-sans">
@@ -85,7 +94,7 @@ export default function EventsPage() {
             return (
               <button
                 key={idx}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => { setActiveCategory(cat); setCurrentPage(1); }}
                 className={`cursor-pointer px-6 py-2.5 rounded-full text-[14px] font-bold transition-all duration-300 ${
                   isActive 
                     ? "bg-[#c20b92] text-white shadow-[0_4px_15px_rgba(194,11,146,0.3)]" 
@@ -100,7 +109,7 @@ export default function EventsPage() {
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredEvents.map((evt: EventData, idx: number) => (
+          {currentEvents.map((evt: EventData, idx: number) => (
             <motion.div
               key={evt.id}
               initial={{ opacity: 0, y: 20 }}
@@ -155,27 +164,35 @@ export default function EventsPage() {
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-2 mt-16">
-          <button className="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
-            <ChevronLeft size={18} />
-          </button>
-          {pageData.pagination.pages.map((page: number) => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={`cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-bold transition-all ${
-                currentPage === page 
-                  ? "bg-[#5129ea] text-white shadow-md" 
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              {page}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-16">
+            <button 
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <ChevronLeft size={18} />
             </button>
-          ))}
-          <button className="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
-            <ChevronRight size={18} />
-          </button>
-        </div>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page: number) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-bold transition-all ${
+                  currentPage === page 
+                    ? "bg-[#5129ea] text-white shadow-md" 
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button 
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

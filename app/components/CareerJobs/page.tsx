@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { JobData } from '../../types';
 import { 
@@ -22,6 +22,38 @@ const IconMap: Record<string, any> = {
 export default function CareerJobs() {
   const router = useRouter();
   const jobsData = data.categories.Event.sections.CareerJobs.variants.EventCareerJobs1;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [department, setDepartment] = useState(jobsData.filters.departments[0] || "All Departments");
+  const [location, setLocation] = useState(jobsData.filters.locations[0] || "All Locations");
+  const [employmentType, setEmploymentType] = useState(jobsData.filters.employmentTypes[0] || "All Employment Types");
+
+  const ITEMS_PER_PAGE = 4;
+
+  const filteredJobs = jobsData.list.filter((job: JobData) => {
+    const matchDept = department.startsWith("All") || job.department === department;
+    const matchLoc = location.startsWith("All") || job.location === location;
+    const matchType = employmentType.startsWith("All") || job.type === employmentType;
+    return matchDept && matchLoc && matchType;
+  });
+
+  const totalItems = filteredJobs.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentJobs = filteredJobs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const clearFilters = () => {
+    setDepartment(jobsData.filters.departments[0] || "All Departments");
+    setLocation(jobsData.filters.locations[0] || "All Locations");
+    setEmploymentType(jobsData.filters.employmentTypes[0] || "All Employment Types");
+    setCurrentPage(1);
+  };
 
   return (
     <section className="pt-2 pb-10 lg:pt-4 lg:pb-12 bg-[#fbfbfb]">
@@ -47,40 +79,52 @@ export default function CareerJobs() {
         {/* Filters */}
         <div className="flex flex-wrap items-center justify-center gap-5 mb-12">
           <div className="relative">
-            <select className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm">
+            <select 
+              value={department}
+              onChange={(e) => { setDepartment(e.target.value); setCurrentPage(1); }}
+              className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm"
+            >
               {jobsData.filters.departments.map((dept: string, i: number) => (
-                <option key={i}>{dept}</option>
+                <option key={i} value={dept}>{dept}</option>
               ))}
             </select>
             <ChevronDown size={20} className="absolute right-5 top-1/2 -translate-y-1/2 text-[#131336] pointer-events-none" />
           </div>
 
           <div className="relative">
-            <select className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm">
+            <select 
+              value={location}
+              onChange={(e) => { setLocation(e.target.value); setCurrentPage(1); }}
+              className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm"
+            >
               {jobsData.filters.locations.map((loc: string, i: number) => (
-                <option key={i}>{loc}</option>
+                <option key={i} value={loc}>{loc}</option>
               ))}
             </select>
             <ChevronDown size={20} className="absolute right-5 top-1/2 -translate-y-1/2 text-[#131336] pointer-events-none" />
           </div>
 
           <div className="relative">
-            <select className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm">
+            <select 
+              value={employmentType}
+              onChange={(e) => { setEmploymentType(e.target.value); setCurrentPage(1); }}
+              className="appearance-none bg-white border border-gray-200/80 rounded-[10px] py-3.5 pl-6 pr-14 text-[15px] md:text-[16px] font-semibold text-[#131336] outline-none focus:border-pink-300 cursor-pointer min-w-[220px] shadow-sm"
+            >
               {jobsData.filters.employmentTypes.map((type: string, i: number) => (
-                <option key={i}>{type}</option>
+                <option key={i} value={type}>{type}</option>
               ))}
             </select>
             <ChevronDown size={20} className="absolute right-5 top-1/2 -translate-y-1/2 text-[#131336] pointer-events-none" />
           </div>
 
-          <button className="flex items-center gap-2 text-[#e32879] text-[16px] font-bold hover:text-[#131336] transition-colors ml-4">
+          <button onClick={clearFilters} className="flex items-center gap-2 text-[#e32879] text-[16px] font-bold hover:text-[#131336] transition-colors ml-4 cursor-pointer">
             {jobsData.filters.clearText} <RotateCcw size={18} strokeWidth={2.5} />
           </button>
         </div>
 
         {/* Jobs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {jobsData.list.map((job: JobData, idx: number) => {
+          {currentJobs.map((job: JobData, idx: number) => {
             const Icon = job.icon ? IconMap[job.icon] : CalendarDays;
 
             return (
@@ -139,29 +183,38 @@ export default function CareerJobs() {
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center items-center gap-2.5">
-          <button className="w-11 h-11 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer text-[15px]">
-            <span className="sr-only">{jobsData.pagination.prevText}</span>
-            &larr;
-          </button>
-
-          {jobsData.pagination.pages.map((page: number) => (
-            <button
-              key={page}
-              className={`w-11 h-11 flex items-center justify-center rounded-lg font-bold transition-colors cursor-pointer text-[15px] ${page === jobsData.pagination.activePage
-                  ? "bg-[#9333ea] text-white shadow-md shadow-purple-500/30"
-                  : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
-                }`}
-            >
-              {page}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2.5">
+            <button 
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="w-11 h-11 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer text-[15px] disabled:opacity-50 disabled:cursor-not-allowed">
+              <span className="sr-only">{jobsData.pagination.prevText || 'Previous'}</span>
+              &larr;
             </button>
-          ))}
 
-          <button className="w-11 h-11 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer text-[15px]">
-            <span className="sr-only">{jobsData.pagination.nextText}</span>
-            &rarr;
-          </button>
-        </div>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page: number) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`w-11 h-11 flex items-center justify-center rounded-lg font-bold transition-colors cursor-pointer text-[15px] ${page === currentPage
+                    ? "bg-[#9333ea] text-white shadow-md shadow-purple-500/30"
+                    : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+                  }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="w-11 h-11 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer text-[15px] disabled:opacity-50 disabled:cursor-not-allowed">
+              <span className="sr-only">{jobsData.pagination.nextText || 'Next'}</span>
+              &rarr;
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

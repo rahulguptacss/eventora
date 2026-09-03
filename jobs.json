@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "Event Manager",
+    "department": "Event Management",
+    "location": "Mumbai, India",
+    "type": "Full-time",
+    "desc": "Lead end-to-end event planning and execution to deliver seamless and impactful experiences.",
+    "isNew": true,
+    "icon": "CalendarDays",
+    "bgClass": "bg-pink-50",
+    "textClass": "text-pink-600",
+    "experience": "3 - 5 Years",
+    "postedOn": "May 15, 2024",
+    "image": "/images/blog/blog1.png",
+    "aboutRole": "We are looking for an enthusiastic and detail-oriented Event Manager to join our team. You will be responsible for planning, coordinating, and executing events that create lasting impressions and exceptional experiences.",
+    "responsibilities": [
+      "Plan, organize, and manage events from concept to completion.",
+      "Coordinate with clients to understand requirements and deliver tailored solutions.",
+      "Manage budgets, timelines, and resources to ensure smooth execution.",
+      "Liaise with vendors, venues, and partners to ensure quality services.",
+      "Lead and manage on-site event operations and troubleshoot issues.",
+      "Evaluate event success and provide post-event reports."
+    ],
+    "requirements": [
+      "Bachelor's degree in Event Management, Hospitality, or related field.",
+      "3-5 years of experience in event planning and management.",
+      "Strong organizational, communication, and negotiation skills.",
+      "Proficiency in event management tools and MS Office.",
+      "Creative mindset with a passion for delivering exceptional experiences."
+    ],
+    "niceToHave": [
+      "Certification in Event Management.",
+      "Experience managing large-scale or corporate events.",
+      "Knowledge of the latest event trends and technologies."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Event Marketing Executive",
+    "department": "Marketing",
+    "location": "Bangalore, India",
+    "type": "Full-time",
+    "desc": "Create and execute marketing campaigns that drive audience engagement and ticket sales.",
+    "isNew": true,
+    "icon": "Users",
+    "bgClass": "bg-purple-50",
+    "textClass": "text-purple-600"
+  },
+  {
+    "id": 3,
+    "title": "Vendor Relations Manager",
+    "department": "Operations",
+    "location": "Delhi, India",
+    "type": "Full-time",
+    "desc": "Build strong vendor partnerships and ensure smooth coordination for every event.",
+    "isNew": true,
+    "icon": "Headphones",
+    "bgClass": "bg-orange-50",
+    "textClass": "text-orange-500"
+  },
+  {
+    "id": 4,
+    "title": "Production Coordinator",
+    "department": "Production",
+    "location": "Pune, India",
+    "type": "Full-time",
+    "desc": "Oversee technical production, logistics, and on-site execution for events.",
+    "isNew": true,
+    "icon": "LayoutGrid",
+    "bgClass": "bg-cyan-50",
+    "textClass": "text-cyan-500"
+  },
+  {
+    "id": 5,
+    "title": "Guest Experience Executive",
+    "department": "Guest Relations",
+    "location": "Hyderabad, India",
+    "type": "Full-time",
+    "desc": "Ensure exceptional guest experiences from registration to event closure.",
+    "isNew": true,
+    "icon": "User",
+    "bgClass": "bg-green-50",
+    "textClass": "text-green-500"
+  },
+  {
+    "id": 6,
+    "title": "Content & Social Media Specialist",
+    "department": "Marketing",
+    "location": "Remote",
+    "type": "Full-time",
+    "desc": "Create engaging content and manage social channels to promote our events.",
+    "isNew": true,
+    "icon": "PenTool",
+    "bgClass": "bg-yellow-50",
+    "textClass": "text-yellow-500"
+  }
+]

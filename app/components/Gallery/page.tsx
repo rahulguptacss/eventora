@@ -13,6 +13,8 @@ export default function Gallery() {
   const [videoTab, setVideoTab] = useState("All Events");
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [visiblePhotos, setVisiblePhotos] = useState(6);
+  const [visibleVideos, setVisibleVideos] = useState(6);
 
   const filteredPhotos = photoTab === "All Events" 
     ? galleryData.photo.images 
@@ -64,7 +66,7 @@ export default function Gallery() {
             {galleryData.photo.tabs.map((tab: string, idx: number) => (
               <button
                 key={idx}
-                onClick={() => setPhotoTab(tab)}
+                onClick={() => { setPhotoTab(tab); setVisiblePhotos(6); }}
                 className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   photoTab === tab
                     ? "bg-[#6b21a8] text-white shadow-lg shadow-purple-500/30"
@@ -79,7 +81,7 @@ export default function Gallery() {
           {/* Photo Grid */}
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <AnimatePresence>
-              {filteredPhotos.map((photo: GalleryItem) => (
+              {filteredPhotos.slice(0, visiblePhotos).map((photo: GalleryItem) => (
                 <motion.div
                   key={photo.id}
                   layout
@@ -104,11 +106,15 @@ export default function Gallery() {
             </AnimatePresence>
           </motion.div>
           
-          <div className="text-center mt-12">
-             <button className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#6b21a8] text-[#6b21a8] text-sm font-bold rounded-full hover:bg-[#6b21a8] hover:text-white transition-all">
-               {galleryData.photo.loadMoreBtn} <RefreshCw size={16} />
-             </button>
-          </div>
+          {visiblePhotos < filteredPhotos.length && (
+            <div className="text-center mt-12">
+               <button 
+                 onClick={() => setVisiblePhotos(prev => prev + 6)}
+                 className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#6b21a8] text-[#6b21a8] text-sm font-bold rounded-full hover:bg-[#6b21a8] hover:text-white transition-all cursor-pointer">
+                 {galleryData.photo.loadMoreBtn} <RefreshCw size={16} />
+               </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -152,7 +158,7 @@ export default function Gallery() {
             {galleryData.video.tabs.map((tab: string, idx: number) => (
               <button
                 key={idx}
-                onClick={() => setVideoTab(tab)}
+                onClick={() => { setVideoTab(tab); setVisibleVideos(6); }}
                 className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   videoTab === tab
                     ? "bg-[#6b21a8] text-white shadow-lg shadow-purple-500/30"
@@ -167,7 +173,7 @@ export default function Gallery() {
           {/* Video Grid */}
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <AnimatePresence>
-              {filteredVideos.map((video: GalleryItem) => (
+              {filteredVideos.slice(0, visibleVideos).map((video: GalleryItem) => (
                 <motion.div
                   key={video.id}
                   layout
@@ -194,11 +200,15 @@ export default function Gallery() {
             </AnimatePresence>
           </motion.div>
           
-          <div className="text-center mt-12">
-             <button className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#6b21a8] text-[#6b21a8] text-sm font-bold rounded-full hover:bg-[#6b21a8] hover:text-white transition-all">
-               {galleryData.video.loadMoreBtn} <RefreshCw size={16} />
-             </button>
-          </div>
+          {visibleVideos < filteredVideos.length && (
+            <div className="text-center mt-12">
+               <button 
+                 onClick={() => setVisibleVideos(prev => prev + 6)}
+                 className="inline-flex items-center gap-2 px-8 py-3.5 border border-[#6b21a8] text-[#6b21a8] text-sm font-bold rounded-full hover:bg-[#6b21a8] hover:text-white transition-all cursor-pointer">
+                 {galleryData.video.loadMoreBtn} <RefreshCw size={16} />
+               </button>
+            </div>
+          )}
         </div>
       </section>
 

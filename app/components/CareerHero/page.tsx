@@ -53,17 +53,6 @@ export default function CareerHero() {
             <p className="text-[#374151] text-[16px] leading-[1.8] font-medium mb-10 max-w-[480px]">
               {heroData.desc}
             </p>
-            
-            <div className="flex flex-wrap items-center gap-4">
-              <button className="cursor-pointer bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-90 text-white px-8 py-3.5 rounded-lg font-semibold text-[16px] transition-opacity flex items-center gap-3">
-                <Users size={22} strokeWidth={1.5} />
-                {heroData.btn1}
-              </button>
-              <button className="cursor-pointer bg-white hover:bg-gray-50 text-[#131336] border border-[#131336] px-8 py-3.5 rounded-lg font-semibold text-[16px] transition-colors flex items-center gap-3">
-                <PlayCircle size={22} strokeWidth={2} className="text-pink-500" />
-                {heroData.btn2}
-              </button>
-            </div>
           </motion.div>
 
           {/* Right Image */}

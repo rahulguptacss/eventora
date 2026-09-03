@@ -148,14 +148,14 @@ export default function ServiceDetail({ id }: { id: string }) {
                 </div>
 
                 <ul className="flex flex-col">
-                  {detailData.sidebar.servicesList.map((srv, idx) => {
-                    const isActive = srv.label === detailData.title;
-                    const isLast = idx === detailData.sidebar.servicesList.length - 1;
+                  {services.map((srv, idx) => {
+                    const isActive = srv.id === detailData.id;
+                    const isLast = idx === services.length - 1;
                     
-                    const getSidebarIcon = (label: string, active: boolean) => {
+                    const getSidebarIcon = (title: string, active: boolean) => {
                       const color = active ? "text-[#c20b92]" : "text-[#4b4e73]";
-                      switch (label) {
-                        case "Wedding Planning": return (
+                      switch (title) {
+                        case "Wedding": return (
                           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={color} xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="8" r="4.5" />
                             <circle cx="7.5" cy="14.5" r="4.5" />
@@ -163,20 +163,20 @@ export default function ServiceDetail({ id }: { id: string }) {
                           </svg>
                         );
                         case "Corporate Events": return <Briefcase size={20} className={color} strokeWidth={1.5} />;
-                        case "Social Events": return <Users size={20} className={color} strokeWidth={1.5} />;
-                        case "Birthday Parties": return <Cake size={20} className={color} strokeWidth={1.5} />;
-                        case "Destination Weddings": return <Plane size={20} className={color} strokeWidth={1.5} />;
-                        case "Event Entertainment": return <Music size={20} className={color} strokeWidth={1.5} />;
-                        case "Venue Booking": return <Building size={20} className={color} strokeWidth={1.5} />;
-                        case "Exhibition & Trade Shows": return <Presentation size={20} className={color} strokeWidth={1.5} />;
-                        default: return <Flower size={20} className={color} strokeWidth={1.5} />;
+                        case "Private Parties": return <Users size={20} className={color} strokeWidth={1.5} />;
+                        case "Birthday": return <Cake size={20} className={color} strokeWidth={1.5} />;
+                        case "Engagement & Anniversary": return <HeartHandshake size={20} className={color} strokeWidth={1.5} />;
+                        case "Award Ceremonies": return <Music size={20} className={color} strokeWidth={1.5} />;
+                        case "Baby Shower": return <Flower size={20} className={color} strokeWidth={1.5} />;
+                        case "Fashion Shows": return <Presentation size={20} className={color} strokeWidth={1.5} />;
+                        default: return <Diamond size={20} className={color} strokeWidth={1.5} />;
                       }
                     };
 
                     return (
                       <li key={idx}>
                         <Link 
-                          href={srv.href}
+                          href={`/services/${srv.id}`}
                           className={`flex items-center justify-between px-6 py-4 transition-all duration-300 relative ${
                             isActive 
                               ? "bg-[#fbf0f7] text-[#c20b92] rounded-[10px] mb-2 font-bold" 
@@ -187,8 +187,8 @@ export default function ServiceDetail({ id }: { id: string }) {
                             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[60%] bg-[#c20b92] rounded-r-md"></div>
                           )}
                           <div className="flex items-center gap-4">
-                            {getSidebarIcon(srv.label, isActive)}
-                            <span className="text-[15px]">{srv.label}</span>
+                            {getSidebarIcon(srv.title, isActive)}
+                            <span className="text-[15px]">{srv.title}</span>
                           </div>
                           <ArrowRight size={18} className={isActive ? "text-[#c20b92]" : "text-[#4b4e73]"} strokeWidth={1.5} />
                         </Link>
