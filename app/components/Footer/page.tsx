@@ -4,7 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Send, Globe, ChevronRight } from "lucide-react";
-import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube, FaPinterest, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube, FaPinterest } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import data from "../../data/data.json";
 
 export default function Footer() {
@@ -18,7 +19,7 @@ export default function Footer() {
       case 'linkedin': return <FaLinkedin size={16} />;
       case 'youtube': return <FaYoutube size={16} />;
       case 'pinterest': return <FaPinterest size={16} />;
-      case 'twitter': return <FaTwitter size={16} />;
+      case 'twitter': return <FaXTwitter size={16} />;
       default: return null;
     }
   };

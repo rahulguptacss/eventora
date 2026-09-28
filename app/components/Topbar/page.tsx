@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import data from "../../data/data.json";
 
 export default function Topbar() {
@@ -30,7 +31,7 @@ export default function Topbar() {
       case 'facebook': return <FaFacebookF size={15} />;
       case 'instagram': return <FaInstagram size={15} />;
       case 'linkedin': return <FaLinkedinIn size={15} />;
-      case 'twitter': return <FaTwitter size={15} />;
+      case 'twitter': return <FaXTwitter size={15} />;
       case 'whatsapp': return <FaWhatsapp size={15} />;
       default: return null;
     }

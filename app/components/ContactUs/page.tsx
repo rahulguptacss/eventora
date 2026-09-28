@@ -3,7 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Globe, Clock, ArrowRight, User, Calendar as CalendarIcon, Users, FileText, Edit2, PhoneCall } from "lucide-react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import data from "../../data/data.json";
 import { SocialLink } from '../../types';
 
@@ -136,7 +137,7 @@ export default function ContactUs() {
                         {social.platform === 'facebook' && <FaFacebook size={12} />}
                         {social.platform === 'instagram' && <FaInstagram size={12} />}
                         {social.platform === 'linkedin' && <FaLinkedin size={12} />}
-                        {social.platform === 'twitter' && <FaTwitter size={12} />}
+                        {social.platform === 'twitter' && <FaXTwitter size={12} />}
                       </a>
                     ))}
                   </div>

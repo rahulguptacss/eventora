@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Dancing_Script, Poppins } from "next/font/google";
 import "./globals.css";
-
+import BackToTop from "./components/shared/BackToTop";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -32,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${dancingScript.variable} ${poppins.variable}`}>
       <body className="antialiased min-h-screen flex flex-col font-poppins">
         {children}
+        <BackToTop />
       </body>
     </html>
   );
